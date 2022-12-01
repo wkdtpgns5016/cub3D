@@ -6,6 +6,7 @@ RSCS = parsing/parsing.c \
 	   parsing/test_map.c \
 	   parsing/test_file.c \
 	   error/error.c \
+	   executing/executing.c \
 	   main.c
 OBJS = $(RSCS:%.c=%.o)
 NAME = cub3d

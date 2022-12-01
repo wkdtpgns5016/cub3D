@@ -4,5 +4,6 @@
 #include "struct.h"
 
 t_game	*parsing(int ac, char **av);
+void	executing(t_game *game);
 
 #endif
