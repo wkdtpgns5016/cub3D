@@ -16,11 +16,17 @@
 #define WIN_W 1920
 #define WIN_H 1080
 
+#define STEP 1
+#define TURN 10
+
 #include "../includes/struct.h"
 
 #include "../minilibx/mlx.h"
 #include "../error/error.h"
 void	locate_man(t_game *game);
+
+int	key_press(int key_code, t_game *game);
+
 void	raycasting(t_game *game, t_info *info, int width);
 
 /*
@@ -43,5 +49,6 @@ typedef struct s_game
 	char	**map;
 }	t_game;
 */
+
 
 #endif
