@@ -21,6 +21,7 @@ SRCS = ft_atoi.c \
 	   ft_isascii.c \
 	   ft_isdigit.c \
 	   ft_isprint.c \
+	   ft_isspace.c \
 	   ft_itoa.c \
 	   ft_memchr.c \
 	   ft_memcmp.c \
@@ -46,7 +47,8 @@ SRCS = ft_atoi.c \
 	   ft_strtrim.c \
 	   ft_substr.c \
 	   ft_tolower.c \
-	   ft_toupper.c
+	   ft_toupper.c \
+	   ft_gnl.c
 
 OBJS = $(SRCS:.c=.o)
 
