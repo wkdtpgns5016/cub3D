@@ -26,4 +26,33 @@ typedef struct s_game
 	char	**map;
 }	t_game;
 
+typedef struct	s_info
+{
+	double	posX;
+	double	posY;
+	double	dirX;
+	double	dirY;
+	double	planeX;
+	double	planeY;
+	int		**buf;
+	double	moveSpeed;
+	double	rotSpeed;
+}	t_info;
+
+typedef struct s_raycast
+{
+	double	cameraX;
+	double	rayDirX;
+	double	rayDirY;
+	int		mapX;
+	int		mapY;
+	double	sideDistX;
+	double	sideDistY;
+	double	deltaDistX;
+	double	deltaDistY;
+	double	perpWallDist;
+	int		stepX;
+	int		stepY;
+}	t_raycast;
+
 #endif
