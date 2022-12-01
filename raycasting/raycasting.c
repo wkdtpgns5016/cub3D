@@ -40,7 +40,20 @@ void	init_raycast(t_raycast *raycast, t_info *info, int x, int width)
 	init_raycast2(raycast, info);
 }
 
-void	dda_algorithm(t_game *game, t_info *info, t_raycast *raycast)
+void	calc_distance(int side, t_raycast *raycast, t_info *info, int height)
+{
+	if (side == 0)
+		raycast->perpWallDist = \
+		(raycast->mapX - info->posX + (1 - raycast->stepX) / 2) \
+		/ raycast->rayDirX;
+	else
+		raycast->perpWallDist = \
+		(raycast->mapY - info->posY + (1 - raycast->stepY) / 2) \
+		/ raycast->rayDirY;
+	raycast->lineHeight = (int)(height / raycast->perpWallDist);
+}
+
+void	dda_algorithm(t_game *game, t_info *info, t_raycast *raycast, int h)
 {
 	int	hit;
 	int	side;
@@ -63,9 +76,10 @@ void	dda_algorithm(t_game *game, t_info *info, t_raycast *raycast)
 		if (game->map[raycast->mapY][raycast->mapX] > 0)
 			hit = 1;
 	}
+	calc_distance(side, raycast, info, h);
 }
 
-void	raycasting(t_game *game, t_info *info, int width)
+void	raycasting(t_game *game, t_info *info, int width, int height)
 {
 	int			x;
 	t_raycast	raycast;
@@ -74,6 +88,6 @@ void	raycasting(t_game *game, t_info *info, int width)
 	while (x < width)
 	{
 		init_raycast(&raycast, info, x, width);
-		dda_algorithm(game, info, &raycast);
+		dda_algorithm(game, info, &raycast, height);
 	}
 }
