@@ -24,6 +24,31 @@
 #include "../minilibx/mlx.h"
 #include "../error/error.h"
 void	locate_man(t_game *game);
+
 int	key_press(int key_code, t_game *game);
+
+void	raycasting(t_game *game, t_info *info, int width);
+
+/*
+typedef struct s_bg
+{
+	void	*img_ptr;
+	char	*img_memory;
+	int		bytes_per_pixel;
+	int		size_line;
+	int		endian;
+}	t_bg;
+
+typedef struct s_game
+{
+	void	*mlx_ptr;
+	void	*win_ptr;
+	void	*img_ptr[4];
+	t_bg	bg;
+	int		color[2];
+	char	**map;
+}	t_game;
+*/
+
 
 #endif
