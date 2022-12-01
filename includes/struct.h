@@ -53,6 +53,7 @@ typedef struct s_raycast
 	double	perpWallDist;
 	int		stepX;
 	int		stepY;
+	int		lineHeight;
 }	t_raycast;
 
 #endif
