@@ -58,5 +58,6 @@ void	executing(t_game *game)
 	paint_background(game);
 	locate_man(game);
 	mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, game->bg.img_ptr, 0, 0);
+	mlx_hook(game->win_ptr, X_EVENT_KEY_PRESS, 0, &key_press, game);
 	mlx_loop(game->mlx_ptr);
 }
