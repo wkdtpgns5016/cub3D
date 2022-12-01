@@ -55,16 +55,16 @@ t_text *read_file(int fd)
 
 	text = (t_text *)malloc(sizeof(t_text));
 	read_element(fd, text);
-//
+/*
 	int i = 0;
 	while (i < TYPE)
 		printf("%s\n", text->element[i++]);
-//
+*/
 	read_map(fd, text);
-//
+/*
 	i = 0;
 	while (text->map[i])
 		printf("%s\n", text->map[i++]);
-//
+*/
 	return (text);
 }

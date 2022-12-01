@@ -35,13 +35,13 @@ void	test_element(char **element, t_game *game)
 	int dummy;
 
 	i = -1;
-	/*while (i < COLOR)
+	while (++i < COLOR)
 	{
 		game->img_ptr[i] = mlx_xpm_file_to_image\
 						   (game->mlx_ptr, element[i], &dummy, &dummy);
 		if (!game->img_ptr[i])
 			ft_error("image path is invalid");
-	}*/
+	}
 	i = COLOR - 1;
 	while (++i < TYPE)
 		game->color[i - COLOR] = ft_atoRGB(element[i]);
@@ -55,8 +55,8 @@ t_game	*test_file(t_text *text)
 	game->mlx_ptr = mlx_init();
 	test_element(text->element, game);
 	
-//
-	printf("%d %d\n", game->color[0], game->color[1]);
+
+//	printf("%d %d\n", game->color[0], game->color[1]);
 	test_map(text->map, game);
 	return (game);
 }

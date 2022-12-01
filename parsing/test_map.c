@@ -70,7 +70,7 @@ void	test_map(char **map, t_game *game)
 			check_x_axis(x, y, map);
 			check_y_axis(x, y, map);
 		}
-		printf("%s\n", map[y]);
+//		printf("%s\n", map[y]);
 	}
 	if (!(content_flag[0] && content_flag[1] && content_flag[2] == 1))
 		ft_error("map is invalid");
