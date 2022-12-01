@@ -21,6 +21,7 @@
 #include "../minilibx/mlx.h"
 #include "../error/error.h"
 void	locate_man(t_game *game);
+void	raycasting(t_game *game, t_info *info, int width);
 
 /*
 typedef struct s_bg
