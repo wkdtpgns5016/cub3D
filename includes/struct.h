@@ -13,6 +13,7 @@ typedef struct s_bg
 	char	*img_memory;
 	int		bytes_per_pixel;
 	int		size_line;
+	int		horizon;
 	int		endian;
 }	t_bg;
 

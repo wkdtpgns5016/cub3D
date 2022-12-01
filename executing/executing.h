@@ -20,6 +20,7 @@
 
 #include "../minilibx/mlx.h"
 #include "../error/error.h"
+void	locate_man(t_game *game);
 
 /*
 typedef struct s_bg
