@@ -37,9 +37,9 @@ void	test_element(char **element, t_game *game)
 	i = -1;
 	while (++i < COLOR)
 	{
-		game->img_ptr[i] = mlx_xpm_file_to_image\
+		game->wall.img_ptr[i] = mlx_xpm_file_to_image\
 						   (game->mlx_ptr, element[i], &dummy, &dummy);
-		if (!game->img_ptr[i])
+		if (!game->wall.img_ptr[i])
 			ft_error("image path is invalid");
 	}
 	i = COLOR - 1;

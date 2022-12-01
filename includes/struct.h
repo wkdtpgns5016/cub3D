@@ -16,12 +16,28 @@ typedef struct s_bg
 	int		endian;
 }	t_bg;
 
+typedef struct s_wall
+{
+	void	*img_ptr[4];
+	int	width;
+	int	height;
+}	t_wall;
+
+typedef struct s_man
+{
+	int	x;
+	int	y;
+	char head;
+	int	radian;
+}	t_man;
+
 typedef struct s_game
 {
 	void	*mlx_ptr;
 	void	*win_ptr;
-	void	*img_ptr[4];
+	t_wall	wall;	
 	t_bg	bg;
+	t_man	man;
 	int		color[2];
 	char	**map;
 }	t_game;
