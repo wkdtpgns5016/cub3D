@@ -19,36 +19,25 @@ void	move(t_game *game, double step_x, double step_y)
 		game->man.pos_x -= step_x;
 }
 
-/*void	turn(t_game *game, int turn_rad)
+void	rotate(t_game *game, int rotate_flag)
 {
-	char head[4];
-	int	i;
+	double	rad;
+	double	org_x;
+	double	org_y;
 
-	head[0] = 'N';
-	head[1] = 'W';
-	head[2] = 'S';
-	head[3] = 'E';
-	i = 0;
-	while (i < 4 && head[i] != game->man.head)
-			i++;
-	game->man.radian += turn_rad;
-	if (game->man.radian <= -90)
-	{
-		i--;
-		game->man.radian = 0;
-	}
-	if (game->man.radian >= 90)
-	{
-		i++;
-		game->man.radian = 0;
-	}
-	if (i < 0)
-		i = 3;
-	if (i == 4)
-		i = 0;
-	game->man.head = head[i];
+	rad = (double)1 / 24;
+	rad *= rotate_flag;
+	org_x = game->man.dir_x;
+	org_y = game->man.dir_y;
+	game->man.dir_x = org_x * cos(rad) - org_y * sin(rad);
+	game->man.dir_y = org_x * sin(rad) + org_y * cos(rad);
+	org_x = game->man.plane_x;
+	org_y = game->man.plane_y;
+	game->man.plane_x = org_x * cos(rad) - org_y * sin(rad);
+	game->man.plane_y = org_x * sin(rad) + org_y * cos(rad);
+
 }
-*/
+
 int	key_press(int keycode, t_game *game)
 {
 	char	*num;
@@ -61,15 +50,16 @@ int	key_press(int keycode, t_game *game)
 		move(game, -1, 0);
 	else if (keycode == KEY_D)
 		move(game, 1, 0);
-	/*else if (keycode == KEY_LEFT)
-		turn(game, -1);
+	else if (keycode == KEY_LEFT)
+		rotate(game, -1);
 	else if (keycode == KEY_RIGHT)
-		turn(game, 1);
-	*/
+		rotate(game, 1);
+
 	else if (keycode == KEY_ESC)
 		exit(0);
 
-	printf("x:%f,y:%f\n", game->man.pos_x, game->man.pos_y);
+	printf("pos_x:%f, %f\n  dir: %f, %f\n plane: %f, %f\n", game->man.pos_x, \
+	game->man.pos_y, game->man.dir_x, game->man.dir_y, game->man.plane_x, game->man.plane_y);
 	return (0);
 }
 
