@@ -26,10 +26,10 @@ typedef struct s_wall
 
 typedef struct s_man
 {
-	int	x;
-	int	y;
-	char head;
-	int	radian;
+	double	pos_x;
+	double	pos_y;
+	double	dir_x;
+	double	dir_y;
 }	t_man;
 
 typedef struct s_game
