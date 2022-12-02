@@ -36,8 +36,10 @@ void	init_raycast(t_raycast *raycast, t_man *man, int x, int width)
 	raycast->ray_dir_y = man->dir_y + man->plane_y * raycast->camera_x;
 	raycast->map_x = (int)man->pos_x;
 	raycast->map_y = (int)man->pos_y;
-	raycast->delta_dist_x = fabs(1 / raycast->ray_dir_x);
-	raycast->delta_dist_y = fabs(1 / raycast->ray_dir_y);
+	// raycast->delta_dist_x = fabs(1 / raycast->ray_dir_x);
+	// raycast->delta_dist_y = fabs(1 / raycast->ray_dir_y);
+	raycast->delta_dist_x = sqrt(1 + (raycast->ray_dir_y * raycast->ray_dir_y) / (raycast->ray_dir_x * raycast->ray_dir_x));
+	raycast->delta_dist_y = sqrt(1 + (raycast->ray_dir_x * raycast->ray_dir_x) / (raycast->ray_dir_y * raycast->ray_dir_y));
 	init_raycast2(raycast, man);
 }
 
@@ -51,6 +53,8 @@ void	calc_distance(int side, t_raycast *raycast, t_man *man, int height)
 		raycast->perp_wall_dist = \
 		(raycast->map_y - man->pos_y + (1.0 - raycast->step_y) / 2) \
 		/ raycast->ray_dir_y;
+	printf("%d %lf", raycast->map_x , man->pos_x);
+	
 	raycast->line_height = (int)(height / raycast->perp_wall_dist);
 }
 
@@ -74,7 +78,7 @@ void	dda_algorithm(t_game *game, t_man *man, t_raycast *raycast)
 			raycast->map_y += raycast->step_y;
 			side = 1;
 		}
-		if (game->map[raycast->map_y][raycast->map_x] > 0)
+		if (game->map[raycast->map_y][raycast->map_x] > '0')
 			hit = 1;
 	}
 	calc_distance(side, raycast, man, WIN_H);
@@ -90,9 +94,8 @@ void	raycasting(t_game *game, t_man *man, int width)
 	{
 		init_raycast(&raycast, man, x, width);
 		dda_algorithm(game, man, &raycast);
-		printf("%f\n", raycast.perp_wall_dist);
-		getchar();
+		printf("%lf", raycast.perp_wall_dist);
+	getchar();
 		x++;
 	}
-	getchar();
 }
