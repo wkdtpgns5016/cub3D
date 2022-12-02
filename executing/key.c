@@ -4,19 +4,31 @@
 void	move(t_game *game, double step_x, double step_y)
 {
 	double	step;
-	int	tmp;
+	int	tmp_x;
+	int	tmp_y;
 
 	step = 0.25;
 	step_x *= step;
 	step_y *= step;
 	game->man.pos_y += step_y;
-	tmp = lround(game->man.pos_y);
-	if (!(0 <= tmp && game->map[tmp]))
+	tmp_y = floor(game->man.pos_y);
+	if (!(0 <= tmp_y && game->map[tmp_y]))
+	{
 		game->man.pos_y -= step_y;
+		return;
+	}
 	game->man.pos_x += step_x;
-	tmp = lround(game->man.pos_x);
-	if (!(0 <= tmp && tmp < ft_strlen(game->map[lround(game->man.pos_y)])))
+	tmp_x = floor(game->man.pos_x);
+	if (!(0 <= tmp_x && tmp_x < ft_strlen(game->map[tmp_y])))
+	{
 		game->man.pos_x -= step_x;
+		return;
+	}
+	if (game->map[tmp_y][tmp_x] == '1')
+	{
+		game->man.pos_y -= step_y;
+		game->man.pos_x -= step_x;
+	}
 }
 
 void	rotate(t_game *game, int rotate_flag)
