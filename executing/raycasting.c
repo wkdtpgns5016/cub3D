@@ -3,39 +3,39 @@
 
 void	init_raycast2(t_raycast *raycast, t_info *info)
 {
-	if (raycast->rayDirX < 0)
+	if (raycast->ray_dir_x < 0)
 	{
-		raycast->stepX = -1;
-		raycast->sideDistX = (info->posX - raycast->mapX) * raycast->deltaDistX;
+		raycast->step_x = -1;
+		raycast->side_dist_x = (info->pos_x - raycast->map_x) * raycast->delta_dist_x;
 	}
 	else
 	{
-		raycast->stepX = 1;
-		raycast->sideDistX = \
-		(raycast->mapX + 1.0 - info->posX) * raycast->deltaDistX;
+		raycast->step_x = 1;
+		raycast->side_dist_x = \
+		(raycast->map_x + 1.0 - info->pos_x) * raycast->delta_dist_x;
 	}
-	if (raycast->rayDirY < 0)
+	if (raycast->ray_dir_y < 0)
 	{
-		raycast->stepY = -1;
-		raycast->sideDistY = (info->posY - raycast->mapY) * raycast->deltaDistY;
+		raycast->step_y = -1;
+		raycast->side_dist_y = (info->pos_y - raycast->map_y) * raycast->delta_dist_y;
 	}
 	else
 	{
-		raycast->stepY = 1;
-		raycast->sideDistY = \
-		(raycast->mapY + 1.0 - info->posY) * raycast->deltaDistY;
+		raycast->step_y = 1;
+		raycast->side_dist_y = \
+		(raycast->map_y + 1.0 - info->pos_y) * raycast->delta_dist_y;
 	}
 }
 
 void	init_raycast(t_raycast *raycast, t_info *info, int x, int width)
 {
-	raycast->cameraX = 2 * x / (double)width - 1;
-	raycast->rayDirX = info->dirX + info->planeX * raycast->cameraX;
-	raycast->rayDirY = info->dirY + info->planeY * raycast->cameraX;
-	raycast->mapX = (int)info->posX;
-	raycast->mapY = (int)info->posY;
-	raycast->deltaDistX = fabs(1 / raycast->rayDirX);
-	raycast->deltaDistY = fabs(1 / raycast->rayDirY);
+	raycast->camera_x = 2 * x / (double)width - 1;
+	raycast->ray_dir_x = info->dir_x + info->plane_x * raycast->camera_x;
+	raycast->ray_dir_y = info->dir_y + info->plane_y * raycast->camera_x;
+	raycast->map_x = (int)info->pos_x;
+	raycast->map_y = (int)info->pos_y;
+	raycast->delta_dist_x = fabs(1 / raycast->ray_dir_x);
+	raycast->delta_dist_y = fabs(1 / raycast->ray_dir_y);
 	init_raycast2(raycast, info);
 }
 
@@ -47,19 +47,19 @@ void	dda_algorithm(t_game *game, t_info *info, t_raycast *raycast)
 	hit = 0;
 	while (hit == 0)
 	{
-		if (raycast->sideDistX < raycast->sideDistY)
+		if (raycast->side_dist_x < raycast->side_dist_y)
 		{
-			raycast->sideDistX += raycast->deltaDistX;
-			raycast->mapX += raycast->stepX;
+			raycast->side_dist_x += raycast->delta_dist_x;
+			raycast->map_x += raycast->step_x;
 			side = 0;
 		}
 		else
 		{
-			raycast->sideDistY += raycast->deltaDistY;
-			raycast->mapY += raycast->stepY;
+			raycast->side_dist_y += raycast->delta_dist_y;
+			raycast->map_y += raycast->step_y;
 			side = 1;
 		}
-		if (game->map[raycast->mapY][raycast->mapX] > 0)
+		if (game->map[raycast->map_y][raycast->map_x] > 0)
 			hit = 1;
 	}
 }

@@ -45,32 +45,32 @@ typedef struct s_game
 
 typedef struct	s_info
 {
-	double	posX;
-	double	posY;
-	double	dirX;
-	double	dirY;
-	double	planeX;
-	double	planeY;
-	int		**buf;
-	double	moveSpeed;
-	double	rotSpeed;
+	double	pos_x;
+	double	pos_y;
+	double	dir_x;
+	double	dir_y;
+	double	plane_x;
+	double	plane_y;
+	//int		**buf;
+	//double	move_speed;
+	//double	rot_speed;
 }	t_info;
 
 typedef struct s_raycast
 {
-	double	cameraX;
-	double	rayDirX;
-	double	rayDirY;
-	int		mapX;
-	int		mapY;
-	double	sideDistX;
-	double	sideDistY;
-	double	deltaDistX;
-	double	deltaDistY;
-	double	perpWallDist;
-	int		stepX;
-	int		stepY;
-	int		lineHeight;
+	double	camera_x;
+	double	ray_dir_x;
+	double	ray_dir_y;
+	int		map_x;
+	int		map_y;
+	double	side_dist_x;
+	double	side_dist_y;
+	double	delta_dist_x;
+	double	delta_dist_y;
+	//double	perp_wall_dist;
+	int		step_x;
+	int		step_y;
+	//int		line_height;
 }	t_raycast;
 
 #endif
