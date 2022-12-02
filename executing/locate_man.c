@@ -52,7 +52,7 @@ void	locate_man(t_game *game)
 				game->man.pos_y = y;
 				set_dir(game, map[y][x]);
 				set_plane(game, map[y][x]);
-				map[y][x] = 0;
+				map[y][x] = '0';
 				return ;
 			}
 		}
