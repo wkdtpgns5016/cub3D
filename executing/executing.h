@@ -28,7 +28,7 @@
 
 void	locate_man(t_game *game);
 int	key_press(int key_code, t_game *game);
-void	raycasting(t_game *game, t_info *info, int width);
+void	raycasting(t_game *game, t_man *man, int width);
 
 /*
 typedef struct s_bg
