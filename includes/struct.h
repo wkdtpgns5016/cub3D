@@ -60,10 +60,10 @@ typedef struct s_raycast
 	double	side_dist_y;
 	double	delta_dist_x;
 	double	delta_dist_y;
-	//double	perp_wall_dist;
+	double	perp_wall_dist;
 	int		step_x;
 	int		step_y;
-	//int		line_height;
+	int		line_height;
 }	t_raycast;
 
 #endif
