@@ -53,7 +53,6 @@ void	calc_distance(int side, t_raycast *raycast, t_man *man, int height)
 		raycast->perp_wall_dist = \
 		(raycast->map_y - man->pos_y + (1.0 - raycast->step_y) / 2) \
 		/ raycast->ray_dir_y;
-	printf("%d %lf", raycast->map_x , man->pos_x);
 	
 	raycast->line_height = (int)(height / raycast->perp_wall_dist);
 }
@@ -94,8 +93,8 @@ void	raycasting(t_game *game, t_man *man, int width)
 	{
 		init_raycast(&raycast, man, x, width);
 		dda_algorithm(game, man, &raycast);
-		printf("%lf", raycast.perp_wall_dist);
-	getchar();
+		if (!(x % 64))
+			printf("%lf\n", raycast.perp_wall_dist);
 		x++;
 	}
 }
