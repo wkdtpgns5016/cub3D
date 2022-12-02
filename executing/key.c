@@ -6,7 +6,7 @@ void	move(t_game *game, double step_x, double step_y)
 	double	step;
 	int	tmp;
 
-	step = 0.5;
+	step = 0.25;
 	step_x *= step;
 	step_y *= step;
 	game->man.pos_y += step_y;
@@ -57,7 +57,7 @@ int	key_press(int keycode, t_game *game)
 
 	else if (keycode == KEY_ESC)
 		exit(0);
-
+	raycasting(game, &game->man, WIN_W);
 	printf("pos_x:%f, %f\n  dir: %f, %f\n plane: %f, %f\n", game->man.pos_x, \
 	game->man.pos_y, game->man.dir_x, game->man.dir_y, game->man.plane_x, game->man.plane_y);
 	return (0);
