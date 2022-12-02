@@ -1,5 +1,19 @@
 #include "executing.h"
 
+void	locate_dir(t_game *game, char dir)
+{
+	game->man.dir_x = 0;
+	game->man.dir_y = 0;
+	if (dir == 'N')
+		game->man.dir_y = -1;
+	else if (dir == 'S')
+		game->man.dir_y = 1;
+	else if (dir == 'E')
+		game->man.dir_x = -1;
+	else if (dir == 'W')
+		game->man.dir_x = 1;
+}
+
 void	locate_man(t_game *game)
 {
 	int x;
@@ -16,10 +30,9 @@ void	locate_man(t_game *game)
 			if (map[y][x] == 'E' || map[y][x] == 'W'||
 					map[y][x] == 'S'|| map[y][x] == 'N')
 			{
-				game->man.x = x;
-				game->man.y = y;
-				game->man.head = map[y][x];
-				game->man.radian = 0;
+				game->man.pos_x = x;
+				game->man.pos_y = y;
+				locate_dir(game, map[y][x]);
 			}
 		}
 	}
