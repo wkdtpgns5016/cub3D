@@ -1,6 +1,6 @@
 #include "executing.h"
 
-void	locate_dir(t_game *game, char dir)
+void	set_dir(t_game *game, char dir)
 {
 	game->man.dir_x = 0;
 	game->man.dir_y = 0;
@@ -12,6 +12,24 @@ void	locate_dir(t_game *game, char dir)
 		game->man.dir_x = -1;
 	else if (dir == 'W')
 		game->man.dir_x = 1;
+}
+
+void	set_plane(t_game *game, char dir)
+{
+	int	plane_size;
+
+	plane_size = 1;
+	game->man.plane_x = 0;
+	game->man.plane_y = 0;
+	if (dir == 'N')
+		game->man.plane_x = plane_size;
+	else if (dir == 'S')
+		game->man.plane_x = -1 * plane_size;
+	else if (dir == 'E')
+		game->man.plane_y = plane_size;
+	else if (dir == 'W')
+		game->man.plane_y = -1 * plane_size;
+
 }
 
 void	locate_man(t_game *game)
@@ -32,7 +50,9 @@ void	locate_man(t_game *game)
 			{
 				game->man.pos_x = x;
 				game->man.pos_y = y;
-				locate_dir(game, map[y][x]);
+				set_dir(game, map[y][x]);
+				set_plane(game, map[y][x]);
+				return ;
 			}
 		}
 	}

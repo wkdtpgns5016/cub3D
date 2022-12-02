@@ -24,12 +24,17 @@ typedef struct s_wall
 	int	height;
 }	t_wall;
 
-typedef struct s_man
+typedef struct	s_man
 {
 	double	pos_x;
 	double	pos_y;
 	double	dir_x;
 	double	dir_y;
+	double	plane_x;
+	double	plane_y;
+	//int		**buf;
+	//double	move_speed;
+	//double	rot_speed;
 }	t_man;
 
 typedef struct s_game
@@ -43,18 +48,6 @@ typedef struct s_game
 	char	**map;
 }	t_game;
 
-typedef struct	s_info
-{
-	double	pos_x;
-	double	pos_y;
-	double	dir_x;
-	double	dir_y;
-	double	plane_x;
-	double	plane_y;
-	//int		**buf;
-	//double	move_speed;
-	//double	rot_speed;
-}	t_info;
 
 typedef struct s_raycast
 {
