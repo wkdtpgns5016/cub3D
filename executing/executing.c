@@ -57,8 +57,7 @@ void	executing(t_game *game)
 	init_background(game);
 	paint_background(game);
 	locate_man(game);
-	//set_cam(game);
-	//raycasting(game, info, width);
+	raycasting(game, &game->man, WIN_W);
 	mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, game->bg.img_ptr, 0, 0);
 	mlx_hook(game->win_ptr, X_EVENT_KEY_PRESS, 0, &key_press, game);
 	mlx_loop(game->mlx_ptr);

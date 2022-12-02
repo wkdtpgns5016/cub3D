@@ -1,5 +1,7 @@
+#include "executing.h"
 #include "../includes/struct.h"
 #include <math.h>
+#include <stdio.h>
 
 void	init_raycast2(t_raycast *raycast, t_man *man)
 {
@@ -39,6 +41,19 @@ void	init_raycast(t_raycast *raycast, t_man *man, int x, int width)
 	init_raycast2(raycast, man);
 }
 
+void	calc_distance(int side, t_raycast *raycast, t_man *man, int height)
+{
+	if (side == 0)
+		raycast->perp_wall_dist = \
+		(raycast->map_x - man->pos_x + (1.0 - raycast->step_x) / 2) \
+		/ raycast->ray_dir_x;
+	else
+		raycast->perp_wall_dist = \
+		(raycast->map_y - man->pos_y + (1.0 - raycast->step_y) / 2) \
+		/ raycast->ray_dir_y;
+	raycast->line_height = (int)(height / raycast->perp_wall_dist);
+}
+
 void	dda_algorithm(t_game *game, t_man *man, t_raycast *raycast)
 {
 	int	hit;
@@ -62,21 +77,22 @@ void	dda_algorithm(t_game *game, t_man *man, t_raycast *raycast)
 		if (game->map[raycast->map_y][raycast->map_x] > 0)
 			hit = 1;
 	}
+	calc_distance(side, raycast, man, WIN_H);
 }
 
 void	raycasting(t_game *game, t_man *man, int width)
 {
 	int			x;
-	double	preDist;
 	t_raycast	raycast;
 
 	x = 0;
 	while (x < width)
 	{
-		
 		init_raycast(&raycast, man, x, width);
 		dda_algorithm(game, man, &raycast);
-		
-		//preDist = raycast.perpWallDist;
+		printf("%f\n", raycast.perp_wall_dist);
+		getchar();
+		x++;
 	}
+	getchar();
 }
