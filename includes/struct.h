@@ -20,8 +20,12 @@ typedef struct s_bg
 typedef struct s_wall
 {
 	void	*img_ptr[4];
-	int	width;
-	int	height;
+	int		*texture[4];
+	int		bytes_per_pixel;
+	int		size_line;
+	int		endian;
+	int		width;
+	int		height;
 }	t_wall;
 
 typedef struct	s_man
@@ -64,6 +68,18 @@ typedef struct s_raycast
 	int		step_x;
 	int		step_y;
 	int		line_height;
+	int		side;
+
+	int		draw_start;
+	int		draw_end;
 }	t_raycast;
+
+typedef struct s_texture_info
+{
+	int		tex_num;
+	int		tex_x;
+	int		tex_y;
+	double	texPos;
+}	t_texture_info;
 
 #endif

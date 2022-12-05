@@ -25,10 +25,12 @@
 #include "../includes/struct.h"
 #include "../minilibx/mlx.h"
 #include "../error/error.h"
+#include "../parsing/parsing.h"
 
 void	locate_man(t_game *game);
 int	key_press(int key_code, t_game *game);
 void	raycasting(t_game *game, t_man *man, int width);
+void	select_texture(t_game *game, t_man *man, t_raycast *raycast, int x);
 
 /*
 typedef struct s_bg
