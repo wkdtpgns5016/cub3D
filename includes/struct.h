@@ -11,6 +11,8 @@ typedef struct s_bg
 {
 	void	*img_ptr;
 	char	*img_memory;
+	int		*memory;
+	int		buffer[480][640];
 	int		bytes_per_pixel;
 	int		size_line;
 	int		horizon;
@@ -51,7 +53,6 @@ typedef struct s_game
 	int		color[2];
 	char	**map;
 }	t_game;
-
 
 typedef struct s_raycast
 {

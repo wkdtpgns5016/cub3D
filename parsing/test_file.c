@@ -1,11 +1,11 @@
 #include "parsing.h"
+#include "../executing/executing.h"
 
 static int	ft_atoRGB(char *element)
 {
 	int	rgb;
 	int	i;
 	int	num;
-
 
 	rgb = 0;
 	i = 0;
@@ -23,46 +23,47 @@ static int	ft_atoRGB(char *element)
 		}
 		if (*element == ',')
 			element++;
-		
 		rgb = rgb << 8 | num;
 	}
 	return (rgb);
 }
 
-int	*get_texture(t_game *game, int idx)
+void	get_texture(t_wall *wall, int idx)
 {
-	// texture 생성함수임
-	
+	int	*memory;
+	int	y;
+	int	x;
+
+	memory = (int *)mlx_get_data_addr(wall->img_ptr[idx], \
+									&wall->bytes_per_pixel, \
+									&wall->size_line, &wall->endian);
+	wall->texture[idx] = (int *)malloc(sizeof(int) * (wall->width * wall->height));
+	y = 0;
+	while (y < wall->height)
+	{
+		x = 0;
+		while (x < wall->width)
+		{
+			wall->texture[idx][wall->width * y + x] = memory[wall->width * y + x];
+			x++;
+		}
+		y++;
+	}
 }
-
-// 이거 참조
-// void	init_background(t_game *game)
-// {
-// 	t_bg	bg;
-// 	int	bits_per_byte;
-// 	int	bits_per_pixel;
-
-// 	bits_per_byte = 8;
-// 	bg.img_ptr = mlx_new_image(game->mlx_ptr, WIN_W, WIN_H);
-// 	bg.img_memory = mlx_get_data_addr(bg.img_ptr, &bits_per_pixel, \
-// 		&bg.size_line, &bg.endian);
-// 	bg.bytes_per_pixel = bits_per_pixel / bits_per_byte;
-// 	bg.horizon = WIN_H / (2 * bg.bytes_per_pixel);
-// 	game->bg = bg;
-// }
 
 void	test_element(char **element, t_game *game)
 {
 	int	i;
-	int dummy;
+	int	dummy;
 
 	i = -1;
 	while (++i < COLOR)
 	{
-		game->wall.img_ptr[i] = mlx_xpm_file_to_image\
-						   (game->mlx_ptr, element[i], \
-						   &game->wall.width, &game->wall.height);
-		// 여따가 텍스처 생성
+		game->wall.img_ptr[i] = mlx_xpm_file_to_image(game->mlx_ptr, \
+													element[i], \
+													&game->wall.width, \
+													&game->wall.height);
+		get_texture(&game->wall, i);
 		if (!game->wall.img_ptr[i])
 			ft_error("image path is invalid");
 	}
