@@ -54,13 +54,12 @@ void	calc_distance(int side, t_raycast *raycast, t_man *man, int height)
 		(raycast->map_y - man->pos_y + (1.0 - raycast->step_y) / 2) \
 		/ raycast->ray_dir_y;
 	
-	raycast->line_height = (int)(height / raycast->perp_wall_dist);
+	raycast->line_height = (int)((double)height / raycast->perp_wall_dist);
 }
 
 void	dda_algorithm(t_game *game, t_man *man, t_raycast *raycast)
 {
 	int	hit;
-	int	side;
 
 	hit = 0;
 	while (hit == 0)
@@ -69,18 +68,24 @@ void	dda_algorithm(t_game *game, t_man *man, t_raycast *raycast)
 		{
 			raycast->side_dist_x += raycast->delta_dist_x;
 			raycast->map_x += raycast->step_x;
-			side = 0;
+			raycast->side = 0;
 		}
 		else
 		{
 			raycast->side_dist_y += raycast->delta_dist_y;
 			raycast->map_y += raycast->step_y;
-			side = 1;
+			raycast->side = 1;
 		}
 		if (game->map[raycast->map_y][raycast->map_x] > '0')
 			hit = 1;
 	}
-	calc_distance(side, raycast, man, WIN_H);
+	calc_distance(raycast->side, raycast, man, WIN_H);
+	raycast->draw_start = -raycast->line_height / 2 + WIN_H / 2;
+	if (raycast->draw_start < 0)
+		raycast->draw_start = 0;
+	raycast->draw_end = raycast->line_height / 2 + WIN_H / 2;
+	if (raycast->draw_end >= WIN_H)
+		raycast->draw_end = WIN_H - 1;
 }
 
 void	raycasting(t_game *game, t_man *man, int width)
@@ -93,8 +98,7 @@ void	raycasting(t_game *game, t_man *man, int width)
 	{
 		init_raycast(&raycast, man, x, width);
 		dda_algorithm(game, man, &raycast);
-		if (!(x % 64))
-			printf("%lf\n", raycast.perp_wall_dist);
+		select_texture(game, man, &raycast, x);
 		x++;
 	}
 }

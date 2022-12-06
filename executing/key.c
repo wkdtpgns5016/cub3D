@@ -69,7 +69,10 @@ int	key_press(int keycode, t_game *game)
 
 	else if (keycode == KEY_ESC)
 		exit(0);
+	mlx_clear_window(game->mlx_ptr, game->win_ptr);
+	init_background(game);
 	raycasting(game, &game->man, WIN_W);
+	mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, game->bg.img_ptr, 0, 0);
 	printf("pos_x:%f, %f\n  dir: %f, %f\n plane: %f, %f\n", game->man.pos_x, \
 	game->man.pos_y, game->man.dir_x, game->man.dir_y, game->man.plane_x, game->man.plane_y);
 	return (0);

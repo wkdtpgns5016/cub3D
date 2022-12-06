@@ -11,6 +11,7 @@ typedef struct s_bg
 {
 	void	*img_ptr;
 	char	*img_memory;
+	int		*memory;
 	int		bytes_per_pixel;
 	int		size_line;
 	int		horizon;
@@ -20,8 +21,12 @@ typedef struct s_bg
 typedef struct s_wall
 {
 	void	*img_ptr[4];
-	int	width;
-	int	height;
+	int		*texture[4];
+	int		bytes_per_pixel;
+	int		size_line;
+	int		endian;
+	int		width;
+	int		height;
 }	t_wall;
 
 typedef struct	s_man
@@ -32,9 +37,6 @@ typedef struct	s_man
 	double	dir_y;
 	double	plane_x;
 	double	plane_y;
-	//int		**buf;
-	//double	move_speed;
-	//double	rot_speed;
 }	t_man;
 
 typedef struct s_game
@@ -47,7 +49,6 @@ typedef struct s_game
 	int		color[2];
 	char	**map;
 }	t_game;
-
 
 typedef struct s_raycast
 {
@@ -64,6 +65,17 @@ typedef struct s_raycast
 	int		step_x;
 	int		step_y;
 	int		line_height;
+	int		side;
+	int		draw_start;
+	int		draw_end;
 }	t_raycast;
+
+typedef struct s_texture_info
+{
+	int		tex_num;
+	int		tex_x;
+	int		tex_y;
+	double	texPos;
+}	t_texture_info;
 
 #endif

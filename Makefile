@@ -10,6 +10,7 @@ RSCS = parsing/parsing.c \
 	   executing/locate_man.c\
 	   executing/key.c \
 	   executing/raycasting.c\
+	   executing/select_texture.c\
 	   main.c
 OBJS = $(RSCS:%.c=%.o)
 NAME = cub3d

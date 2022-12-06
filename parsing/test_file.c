@@ -1,11 +1,11 @@
 #include "parsing.h"
+#include "../executing/executing.h"
 
 static int	ft_atoRGB(char *element)
 {
 	int	rgb;
 	int	i;
 	int	num;
-
 
 	rgb = 0;
 	i = 0;
@@ -23,7 +23,6 @@ static int	ft_atoRGB(char *element)
 		}
 		if (*element == ',')
 			element++;
-		
 		rgb = rgb << 8 | num;
 	}
 	return (rgb);
@@ -32,13 +31,18 @@ static int	ft_atoRGB(char *element)
 void	test_element(char **element, t_game *game)
 {
 	int	i;
-	int dummy;
+	int	dummy;
 
 	i = -1;
 	while (++i < COLOR)
 	{
-		game->wall.img_ptr[i] = mlx_xpm_file_to_image\
-						   (game->mlx_ptr, element[i], &dummy, &dummy);
+		game->wall.img_ptr[i] = mlx_xpm_file_to_image(game->mlx_ptr, \
+													element[i], \
+													&game->wall.width, \
+													&game->wall.height);
+		game->wall.texture[i] = (int *)mlx_get_data_addr(game->wall.img_ptr[i], \
+									&game->wall.bytes_per_pixel, \
+									&game->wall.size_line, &game->wall.endian);
 		if (!game->wall.img_ptr[i])
 			ft_error("image path is invalid");
 	}

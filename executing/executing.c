@@ -17,6 +17,7 @@ void	init_background(t_game *game)
 	bg.img_ptr = mlx_new_image(game->mlx_ptr, WIN_W, WIN_H);
 	bg.img_memory = mlx_get_data_addr(bg.img_ptr, &bits_per_pixel, \
 		&bg.size_line, &bg.endian);
+	bg.memory = (int *)bg.img_memory;
 	bg.bytes_per_pixel = bits_per_pixel / bits_per_byte;
 	bg.horizon = WIN_H / (2 * bg.bytes_per_pixel);
 	game->bg = bg;
@@ -55,10 +56,11 @@ void	executing(t_game *game)
 {
 	init_window(game);
 	init_background(game);
-	paint_background(game);
+	//paint_background(game);
 	locate_man(game);
 	mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, game->bg.img_ptr, 0, 0);
 	raycasting(game, &game->man, WIN_W);
+	mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, game->bg.img_ptr, 0, 0);
 	mlx_hook(game->win_ptr, X_EVENT_KEY_PRESS, 0, &key_press, game);
 	mlx_loop(game->mlx_ptr);
 }
