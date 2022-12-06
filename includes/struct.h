@@ -12,7 +12,6 @@ typedef struct s_bg
 	void	*img_ptr;
 	char	*img_memory;
 	int		*memory;
-	int		buffer[480][640];
 	int		bytes_per_pixel;
 	int		size_line;
 	int		horizon;
@@ -38,9 +37,6 @@ typedef struct	s_man
 	double	dir_y;
 	double	plane_x;
 	double	plane_y;
-	//int		**buf;
-	//double	move_speed;
-	//double	rot_speed;
 }	t_man;
 
 typedef struct s_game

@@ -28,29 +28,6 @@ static int	ft_atoRGB(char *element)
 	return (rgb);
 }
 
-void	get_texture(t_wall *wall, int idx)
-{
-	int	*memory;
-	int	y;
-	int	x;
-
-	memory = (int *)mlx_get_data_addr(wall->img_ptr[idx], \
-									&wall->bytes_per_pixel, \
-									&wall->size_line, &wall->endian);
-	wall->texture[idx] = (int *)malloc(sizeof(int) * (wall->width * wall->height));
-	y = 0;
-	while (y < wall->height)
-	{
-		x = 0;
-		while (x < wall->width)
-		{
-			wall->texture[idx][wall->width * y + x] = memory[wall->width * y + x];
-			x++;
-		}
-		y++;
-	}
-}
-
 void	test_element(char **element, t_game *game)
 {
 	int	i;
@@ -63,7 +40,9 @@ void	test_element(char **element, t_game *game)
 													element[i], \
 													&game->wall.width, \
 													&game->wall.height);
-		get_texture(&game->wall, i);
+		game->wall.texture[i] = (int *)mlx_get_data_addr(game->wall.img_ptr[i], \
+									&game->wall.bytes_per_pixel, \
+									&game->wall.size_line, &game->wall.endian);
 		if (!game->wall.img_ptr[i])
 			ft_error("image path is invalid");
 	}

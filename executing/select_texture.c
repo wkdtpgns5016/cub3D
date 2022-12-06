@@ -29,7 +29,7 @@ double	get_wall_x(t_man *man, t_raycast *raycast)
 	return (wall_x);
 }
 
-int	get_texture_x(t_game *game, t_raycast *raycast, int wall_x)
+int	get_texture_x(t_game *game, t_raycast *raycast, double wall_x)
 {
 	int		tex_x;
 
@@ -68,7 +68,7 @@ void	select_texture(t_game *game, t_man *man, t_raycast *raycast, int x)
 
 	i = 0;
 	wall_x = get_wall_x(man, raycast);
-	tex_info.tex_num = 0;
+	tex_info.tex_num = 1;
 	tex_info.tex_x = get_texture_x(game, raycast, wall_x);
 	put_buffer(game, raycast, &tex_info, x);
 }
