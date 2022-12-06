@@ -5,15 +5,14 @@ int	get_texture_num(t_man *man, t_raycast *raycast)
 {
 	int	tex_num;
 
-	// 동쪽일경우
-	if (raycast->ray_dir_x)
-	tex_num = EA;
-	// 서쪽일경우
-	tex_num = WE;
-	// 남쪽일경우
-	tex_num = SO;
-	// 북쪽일경우
-	tex_num = NO;
+	if (raycast->side == 0 && raycast->ray_dir_x > 0)
+		tex_num = EA;
+	else if (raycast->side == 0 && raycast->ray_dir_x < 0)
+		tex_num = WE;
+	if (raycast->side == 1 && raycast->ray_dir_y > 0)
+		tex_num = SO;
+	else if (raycast->side == 1 && raycast->ray_dir_y < 0)
+		tex_num = NO;
 	return (tex_num);
 }
 
@@ -68,7 +67,7 @@ void	select_texture(t_game *game, t_man *man, t_raycast *raycast, int x)
 
 	i = 0;
 	wall_x = get_wall_x(man, raycast);
-	tex_info.tex_num = 1;
+	tex_info.tex_num = get_texture_num(man, raycast);
 	tex_info.tex_x = get_texture_x(game, raycast, wall_x);
 	put_buffer(game, raycast, &tex_info, x);
 }
