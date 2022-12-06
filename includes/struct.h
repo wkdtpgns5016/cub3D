@@ -66,7 +66,6 @@ typedef struct s_raycast
 	int		step_y;
 	int		line_height;
 	int		side;
-
 	int		draw_start;
 	int		draw_end;
 }	t_raycast;
