@@ -69,9 +69,9 @@ static int	read_type(int fd, char **type)
 
 void	read_element(int fd, t_text *text)
 {
-	int	type_flag[TYPE];
-	int	type_num;
-	int i;
+	int		type_flag[TYPE];
+	int		type_num;
+	int		i;
 	char	*type[TYPE];
 
 	ft_memset(type_flag, 0, sizeof(int) * TYPE);

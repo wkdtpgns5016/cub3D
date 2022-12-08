@@ -25,4 +25,3 @@ t_game	*parsing(int ac, char **av)
 	free_text(text);
 	return (game);
 }
-

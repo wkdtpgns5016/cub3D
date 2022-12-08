@@ -38,4 +38,5 @@
 .DS_Store
 .vscode/
 cub3d
+tags
 # End of https://www.toptal.com/developers/gitignore/api/c++

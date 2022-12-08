@@ -19,5 +19,5 @@ int open_file(char *file)
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
 		ft_error("file open is failed");
-	return fd;
+	return (fd);
 }

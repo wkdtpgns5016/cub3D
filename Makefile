@@ -2,6 +2,7 @@ CC = cc -g -lmlx -framework OpenGL -framework AppKit -lz#-Wall -Wextra -Werror
 RSCS = parsing/parsing.c \
 	   parsing/open_file.c \
 	   parsing/read_element.c \
+	   parsing/read_map.c \
 	   parsing/read_file.c \
 	   parsing/test_map.c \
 	   parsing/test_file.c \
