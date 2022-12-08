@@ -25,12 +25,13 @@
 #include <fcntl.h>
 #include "../includes/struct.h"
 #include "../libft/libft.h"
+#include "../error/error.h"
 #include "../minilibx/mlx.h"
 
 
-int ft_error(char *message);
 int	open_file(char *file);
 void	read_element(int fd, t_text *text);
+char	**read_map(int fd);
 t_text	*read_file(int fd);
 void	test_map(char **map, t_game *game);
 t_game	*test_file(t_text *text);

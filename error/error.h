@@ -4,6 +4,6 @@
 #include "../libft/libft.h"
 #include <unistd.h>
 
-int ft_error(char *message);
+void	ft_error(char *message);
 
 #endif
