@@ -57,6 +57,9 @@ void	init_raycast(t_raycast *raycast, t_man *man, int x, int width)
 
 void	calc_distance(int side, t_raycast *raycast, t_man *man, int height)
 {
+	double	horizon;
+
+	horizon = WIN_H / 2;
 	if (side == 0)
 		raycast->perp_wall_dist = \
 		(raycast->map_x - man->pos_x + (1.0 - raycast->step_x) / 2) \
@@ -66,10 +69,10 @@ void	calc_distance(int side, t_raycast *raycast, t_man *man, int height)
 		(raycast->map_y - man->pos_y + (1.0 - raycast->step_y) / 2) \
 		/ raycast->ray_dir_y;
 	raycast->line_height = (int)((double)height / raycast->perp_wall_dist);
-	raycast->draw_start = -raycast->line_height / 2 + WIN_H / 2;
+	raycast->draw_start = -raycast->line_height / 2 + horizon;
 	if (raycast->draw_start < 0)
 		raycast->draw_start = 0;
-	raycast->draw_end = raycast->line_height / 2 + WIN_H / 2;
+	raycast->draw_end = raycast->line_height / 2 + horizon;
 	if (raycast->draw_end >= WIN_H)
 		raycast->draw_end = WIN_H - 1;
 }

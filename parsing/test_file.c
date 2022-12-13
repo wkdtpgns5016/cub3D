@@ -45,6 +45,7 @@ void	test_element(char **element, t_game *game)
 	int	i;
 
 	i = -1;
+	game->mlx_ptr = mlx_init();
 	while (++i < COLOR)
 	{
 		game->wall.img_ptr[i] = mlx_xpm_file_to_image(game->mlx_ptr, \
@@ -67,8 +68,7 @@ t_game	*test_file(t_text *text)
 	t_game	*game;
 
 	game = (t_game *)malloc(sizeof(t_game));
-	game->mlx_ptr = mlx_init();
-	test_element(text->element, game);
 	test_map(text->map, game);
+	test_element(text->element, game);
 	return (game);
 }

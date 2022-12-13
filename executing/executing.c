@@ -57,6 +57,13 @@ void	paint_background(t_game *game)
 	}
 }
 
+int	exit_game(t_game *game)
+{
+	mlx_destroy_window(game->mlx_ptr, game->win_ptr);
+	exit(0);
+	return (0);
+}
+
 void	executing(t_game *game)
 {
 	init_window(game);
@@ -66,6 +73,7 @@ void	executing(t_game *game)
 	raycasting(game, &game->man, WIN_W);
 	mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, \
 		game->bg.img_ptr, 0, 0);
+	mlx_hook(game->win_ptr, X_EVENT_KEY_EXIT, 0, &exit_game, game);
 	mlx_hook(game->win_ptr, X_EVENT_KEY_PRESS, 0, &key_press, game);
 	mlx_loop(game->mlx_ptr);
 }

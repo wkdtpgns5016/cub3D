@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "parsing.h"
+#include <stdio.h>
 
 static void	set_type(char **type)
 {
@@ -71,8 +72,10 @@ static int	read_type(int fd, char **type)
 	if (i == 0 && id[i] == '\n')
 		return (-1);
 	type_num = 0;
+	id[i] = 0;
 	while (type_num < TYPE
-		&& ft_strncmp(type[type_num], id, ft_strlen(type[type_num])))
+		&& !(!ft_strncmp(type[type_num], id, ft_strlen(type[type_num]))
+		&& ft_strlen(id) == ft_strlen(type[type_num])))
 		type_num++;
 	if (type_num == TYPE)
 		ft_error("element is wrong");
