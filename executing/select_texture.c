@@ -65,10 +65,10 @@ void	put_buffer(t_game *game, t_raycast *raycast, \
 	y = raycast->draw_start;
 	while (y < raycast->draw_end)
 	{
-		tex_info->tex_y = (int)tex_info->tex_pos & (game->wall.height - 1);
+		tex_info->tex_y = (int)tex_info->tex_pos % game->wall.height;
 		tex_info->tex_pos += step;
 		color = game->wall.texture[tex_info->tex_num] \
-			[game->wall.height * tex_info->tex_y + tex_info->tex_x];
+			[game->wall.width * tex_info->tex_y + tex_info->tex_x];
 		game->bg.memory[y * WIN_W + x] = color;
 		y++;
 	}

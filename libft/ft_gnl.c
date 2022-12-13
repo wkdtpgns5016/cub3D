@@ -30,5 +30,6 @@ char	*get_next_line(int fd)
 		return (NULL);
 	}
 	new = ft_strdup(buf);
+	free(buf);
 	return (new);
 }
