@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   read_map.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sunwchoi <sunwchoi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/13 13:36:23 by sunwchoi          #+#    #+#             */
+/*   Updated: 2022/12/13 13:37:45 by sunwchoi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "parsing.h"
 
-int is_empty_line(char *line)
+static int	is_empty_line(char *line)
 {
 	while (*line && ft_isspace(*line))
 		line++;
@@ -9,9 +21,9 @@ int is_empty_line(char *line)
 	return (0);
 }
 
-char *get_line_with_nullcheck(int fd)
+static char	*get_line_with_nullcheck(int fd)
 {
-	char *line;
+	char	*line;
 
 	line = get_next_line(fd);
 	if (!line)
@@ -19,9 +31,9 @@ char *get_line_with_nullcheck(int fd)
 	return (line);
 }
 
-char *jump_to_firstline(int fd)
+static char	*jump_to_firstline(int fd)
 {
-	char *line;
+	char	*line;
 
 	while (1)
 	{
@@ -32,7 +44,7 @@ char *jump_to_firstline(int fd)
 	}
 }
 
-char	*join_firstline_to_eof(char *firstline, int fd)
+static char	*join_firstline_to_eof(char *firstline, int fd)
 {
 	char	*present_line;
 	char	*next_line;
@@ -53,7 +65,7 @@ char	*join_firstline_to_eof(char *firstline, int fd)
 	return (whole_line);
 }
 
-char **read_map(int fd)
+char	**read_map(int fd)
 {
 	char	*firstline;
 	char	*whole_line;
@@ -65,4 +77,3 @@ char **read_map(int fd)
 	free(whole_line);
 	return (map);
 }
-

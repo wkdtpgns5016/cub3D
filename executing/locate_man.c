@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   locate_man.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sunwchoi <sunwchoi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/13 14:08:40 by sunwchoi          #+#    #+#             */
+/*   Updated: 2022/12/13 14:08:41 by sunwchoi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "executing.h"
 
 void	set_dir(t_game *game, char dir)
@@ -29,14 +41,13 @@ void	set_plane(t_game *game, char dir)
 		game->man.plane_y = plane_size;
 	else if (dir == 'W')
 		game->man.plane_y = -1 * plane_size;
-
 }
 
 void	locate_man(t_game *game)
 {
-	int x;
-	int y;
-	char **map;
+	int		x;
+	int		y;
+	char	**map;
 
 	y = -1;
 	map = game->map;
@@ -45,8 +56,8 @@ void	locate_man(t_game *game)
 		x = -1;
 		while (game->map[y][++x])
 		{
-			if (map[y][x] == 'E' || map[y][x] == 'W'||
-					map[y][x] == 'S'|| map[y][x] == 'N')
+			if (map[y][x] == 'E' || map[y][x] == 'W' ||
+				map[y][x] == 'S' || map[y][x] == 'N')
 			{
 				game->man.pos_x = x;
 				game->man.pos_y = y;

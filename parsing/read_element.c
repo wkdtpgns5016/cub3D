@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   read_element.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sunwchoi <sunwchoi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/13 13:42:01 by sunwchoi          #+#    #+#             */
+/*   Updated: 2022/12/13 13:42:02 by sunwchoi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "parsing.h"
 
 static void	set_type(char **type)
@@ -17,14 +29,14 @@ static int	ft_read(int fd, char *buf, size_t len)
 	ret = read(fd, buf, len);
 	if (ret <= 0)
 		ft_error("element is wrong");
-	return len;
+	return (len);
 }
 
-static char *ft_gnl(int fd)
+static char	*ft_gnl(int fd)
 {
-	char *line;
-	char *tmp;
-	int i;
+	char	*line;
+	char	*tmp;
+	int		i;
 
 	line = (char *)malloc(sizeof(char) * 1000000);
 	if (!line)
@@ -33,7 +45,7 @@ static char *ft_gnl(int fd)
 	while (ft_read(fd, line + i, 1) && line[i] != '\n')
 		i++;
 	line[i] = 0;
-	i  = 0;
+	i = 0;
 	while (line[i] && ft_isspace(line[i]))
 		i++;
 	tmp = ft_strdup(line + i);
@@ -46,13 +58,13 @@ static char *ft_gnl(int fd)
 static int	read_type(int fd, char **type)
 {
 	char	id[3];
-	int	i;
-	int	type_num;
+	int		i;
+	int		type_num;
 
 	ft_memset(id, 0, sizeof(char) * 3);
 	i = 0;
-	while ((i < 3 && (ft_read(fd, id + i, 1) == 1)) 
-			&& !(ft_isspace(id[i]) || id[i] == '\n'))
+	while ((i < 3 && (ft_read(fd, id + i, 1) == 1))
+		&& !(ft_isspace(id[i]) || id[i] == '\n'))
 			i++;
 	if (i == 3)
 		ft_error("element is wrong");
@@ -60,7 +72,7 @@ static int	read_type(int fd, char **type)
 		return (-1);
 	type_num = 0;
 	while (type_num < TYPE
-			&& ft_strncmp(type[type_num], id, ft_strlen(type[type_num])))
+		&& ft_strncmp(type[type_num], id, ft_strlen(type[type_num])))
 		type_num++;
 	if (type_num == TYPE)
 		ft_error("element is wrong");
@@ -81,13 +93,13 @@ void	read_element(int fd, t_text *text)
 	{
 		type_num = read_type(fd, type);
 		if (type_num < 0)
-			continue;
+			continue ;
 		else
 		{
 			if (!type_flag[type_num])
 				type_flag[type_num] = 1;
 			else
-				ft_error("element is wrong");;
+				ft_error("element is wrong");
 			text->element[type_num] = ft_gnl(fd);
 		}
 		i = 0;
