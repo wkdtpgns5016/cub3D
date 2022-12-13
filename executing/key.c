@@ -1,32 +1,51 @@
 #include "executing.h"
 #include <stdio.h>
 
+int	check_move_case(t_game *game, double dir_x, double dir_y, int side)
+{
+	double step;
+
+	step = 0.2111;
+	if (side == 0)
+	{
+
+	}
+	else
+	{
+
+	}
+}
+
 void	move(t_game	*game, double dir_x, double dir_y, int side)
 {
  	double	step;
 
-	step = 0.25;
+	step = 0.2111;
 	if (side == 0)
 	{
-		if (game->map[(int)game->man.pos_y][(int)(game->man.pos_x + dir_x * step)] == '0')
+		if (game->map[(int)game->man.pos_y][(int)(game->man.pos_x + dir_x * step)] == '0' \
+		&& game->map[(int)(game->man.pos_y + dir_y * step)][(int)game->man.pos_x] == '0')
+		{
 			game->man.pos_x += dir_x * step;
-		if (game->map[(int)(game->man.pos_y + dir_y * 0.25)][(int)game->man.pos_x] == '0')
+			game->man.pos_y += dir_y * step;
+		}
+		else if (game->map[(int)game->man.pos_y][(int)(game->man.pos_x + dir_x * step)] == '0')
+			game->man.pos_x += dir_x * step;
+		else if (game->map[(int)(game->man.pos_y + dir_y * step)][(int)game->man.pos_x] == '0')
 			game->man.pos_y += dir_y * step;
 	}
 	else
 	{
-		if (game->map[(int)game->man.pos_y][(int)(game->man.pos_x + dir_x * step)] == '0')
+		if (game->map[(int)game->man.pos_y][(int)(game->man.pos_x + dir_y * step)] == '0' \
+		&& game->map[(int)(game->man.pos_y + dir_x * step)][(int)(game->man.pos_x)] == '0')
 		{
-			game->man.pos_x -= dir_y * step;
-			if (game->map[(int)game->man.pos_y][(int)game->man.pos_x] == '1')
-				game->man.pos_x += dir_y * step;
-		}
-		if (game->map[(int)(game->man.pos_y + dir_y * step)][(int)game->man.pos_x] == '0')
-		{
+			game->man.pos_x += dir_y * step;
 			game->man.pos_y += dir_x * step;
-			if (game->map[(int)game->man.pos_y][(int)game->man.pos_x] == '1')
-				game->man.pos_y -= dir_x * step;
 		}
+		else if (game->map[(int)game->man.pos_y][(int)(game->man.pos_x + dir_y * step)] == '0')
+				game->man.pos_x += dir_y * step;
+		else if (game->map[(int)(game->man.pos_y + dir_x * step)][(int)(game->man.pos_x)] == '0')
+				game->man.pos_y += dir_x * step;
 	}
 }
 
@@ -90,10 +109,10 @@ int	key_press(int keycode, t_game *game)
 		move(game, -game->man.dir_x, -game->man.dir_y, 0);
 		// move(game, 0, 1);
 	else if (keycode == KEY_A)
-		move(game, -game->man.dir_x, -game->man.dir_y, 1);
+		move(game, -game->man.dir_x, game->man.dir_y, 1);
 		// move(game, -1, 0);
 	else if (keycode == KEY_D)
-		move(game, game->man.dir_x, game->man.dir_y, 1);
+		move(game, game->man.dir_x, -game->man.dir_y, 1);
 		// move(game, 1, 0);
 	else if (keycode == KEY_LEFT)
 		rotate(game, -1);
