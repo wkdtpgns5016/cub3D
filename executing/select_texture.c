@@ -1,7 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   select_texture.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sunwchoi <sunwchoi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/13 14:15:09 by sunwchoi          #+#    #+#             */
+/*   Updated: 2022/12/13 14:28:11 by sunwchoi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "executing.h"
 #include "../includes/struct.h"
 
-int	get_texture_num(t_man *man, t_raycast *raycast)
+int	get_texture_num(t_raycast *raycast)
 {
 	int	tex_num;
 
@@ -21,9 +33,9 @@ double	get_wall_x(t_man *man, t_raycast *raycast)
 	double	wall_x;
 
 	if (raycast->side == 0)
-		wall_x = man->pos_y+ raycast->perp_wall_dist * raycast->ray_dir_y;
+		wall_x = man->pos_y + raycast->perp_wall_dist * raycast->ray_dir_y;
 	else
-		wall_x = man->pos_x+ raycast->perp_wall_dist * raycast->ray_dir_x;
+		wall_x = man->pos_x + raycast->perp_wall_dist * raycast->ray_dir_x;
 	wall_x -= floor((wall_x));
 	return (wall_x);
 }
@@ -40,20 +52,23 @@ int	get_texture_x(t_game *game, t_raycast *raycast, double wall_x)
 	return (tex_x);
 }
 
-void	put_buffer(t_game *game, t_raycast *raycast, t_texture_info *tex_info, int x)
+void	put_buffer(t_game *game, t_raycast *raycast, \
+		t_texture_info *tex_info, int x)
 {
 	double			step;
 	int				y;
 	int				color;
 
 	step = 1.0 * game->wall.height / raycast->line_height;
-	tex_info->texPos = (raycast->draw_start - WIN_H / 2 + raycast->line_height / 2) * step;
+	tex_info->tex_pos = (raycast->draw_start - WIN_H / 2 \
+			+ raycast->line_height / 2) * step;
 	y = raycast->draw_start;
 	while (y < raycast->draw_end)
 	{
-		tex_info->tex_y = (int)tex_info->texPos & (game->wall.height - 1);
-		tex_info->texPos += step;
-		color = game->wall.texture[tex_info->tex_num][game->wall.height * tex_info->tex_y + tex_info->tex_x];
+		tex_info->tex_y = (int)tex_info->tex_pos & (game->wall.height - 1);
+		tex_info->tex_pos += step;
+		color = game->wall.texture[tex_info->tex_num] \
+			[game->wall.height * tex_info->tex_y + tex_info->tex_x];
 		game->bg.memory[y * WIN_W + x] = color;
 		y++;
 	}
@@ -61,13 +76,13 @@ void	put_buffer(t_game *game, t_raycast *raycast, t_texture_info *tex_info, int 
 
 void	select_texture(t_game *game, t_man *man, t_raycast *raycast, int x)
 {
-	t_texture_info tex_info;
-	double	wall_x;
-	int		i;
+	t_texture_info	tex_info;
+	double			wall_x;
+	int				i;
 
 	i = 0;
 	wall_x = get_wall_x(man, raycast);
-	tex_info.tex_num = get_texture_num(man, raycast);
+	tex_info.tex_num = get_texture_num(raycast);
 	tex_info.tex_x = get_texture_x(game, raycast, wall_x);
 	put_buffer(game, raycast, &tex_info, x);
 }

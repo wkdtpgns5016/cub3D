@@ -1,7 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   test_file.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sunwchoi <sunwchoi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/13 13:43:51 by sunwchoi          #+#    #+#             */
+/*   Updated: 2022/12/13 13:43:53 by sunwchoi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "parsing.h"
 #include "../executing/executing.h"
 
-static int	ft_atoRGB(char *element)
+static int	ft_atorgb(char *element)
 {
 	int	rgb;
 	int	i;
@@ -31,7 +43,6 @@ static int	ft_atoRGB(char *element)
 void	test_element(char **element, t_game *game)
 {
 	int	i;
-	int	dummy;
 
 	i = -1;
 	while (++i < COLOR)
@@ -48,7 +59,7 @@ void	test_element(char **element, t_game *game)
 	}
 	i = COLOR - 1;
 	while (++i < TYPE)
-		game->color[i - COLOR] = ft_atoRGB(element[i]);
+		game->color[i - COLOR] = ft_atorgb(element[i]);
 }
 
 t_game	*test_file(t_text *text)
@@ -58,9 +69,6 @@ t_game	*test_file(t_text *text)
 	game = (t_game *)malloc(sizeof(t_game));
 	game->mlx_ptr = mlx_init();
 	test_element(text->element, game);
-	
-
-//	printf("%d %d\n", game->color[0], game->color[1]);
 	test_map(text->map, game);
 	return (game);
 }

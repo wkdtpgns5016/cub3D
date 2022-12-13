@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sunwchoi <sunwchoi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/13 13:30:55 by sunwchoi          #+#    #+#             */
+/*   Updated: 2022/12/13 13:32:03 by sunwchoi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "parsing.h"
 
-static void free_text(t_text *text)
+static void	free_text(t_text *text)
 {
 	int	i;
 
@@ -12,9 +24,9 @@ static void free_text(t_text *text)
 
 t_game	*parsing(int ac, char **av)
 {
-	int fd;
-	t_text *text;
-	t_game *game;
+	int		fd;
+	t_text	*text;
+	t_game	*game;
 
 	if (ac != 2)
 		ft_error("argument must be one");

@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   open_file.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sunwchoi <sunwchoi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/13 13:32:40 by sunwchoi          #+#    #+#             */
+/*   Updated: 2022/12/13 13:33:27 by sunwchoi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "parsing.h"
 
 static void	check_filename(char *file)
 {
-	char *extension;
+	char	*extension;
 
 	extension = ft_strrchr(file, '.');
 	if (!extension)
@@ -11,9 +23,9 @@ static void	check_filename(char *file)
 		ft_error("file extension must be .cub");
 }
 
-int open_file(char *file)
+int	open_file(char *file)
 {
-	int fd;
+	int	fd;
 
 	check_filename(file);
 	fd = open(file, O_RDONLY);

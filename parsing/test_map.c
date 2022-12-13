@@ -1,10 +1,19 @@
-#include "parsing.h"
-#include <stdio.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   test_map.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sunwchoi <sunwchoi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/13 13:44:18 by sunwchoi          #+#    #+#             */
+/*   Updated: 2022/12/13 13:47:19 by sunwchoi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "parsing.h"
 
 static int	check_one_arg(char current)
 {
-
 	if (current == FLOOR)
 		return (0);
 	if (current == WALL)
@@ -19,18 +28,18 @@ static int	check_one_arg(char current)
 static void	check_with_around_arg(char pre, char current, char next)
 {
 	if (ft_isspace(current)
-			&& ((pre != 0 && pre != WALL && !ft_isspace(pre)) ||
-			(next != 0 && next != WALL && !ft_isspace(next))))
+		&& ((pre != 0 && pre != WALL && !ft_isspace(pre))
+			|| (next != 0 && next != WALL && !ft_isspace(next))))
 		ft_error("map is invalid");
 	if ((pre == 0 || next == 0)
-			&& (current != WALL && !ft_isspace(current)))
+		&& (current != WALL && !ft_isspace(current)))
 		ft_error("map is invalid");
 }
 
-static void	check_x_axis(int x, int y, char **map)
+static void	check_x_axis(size_t x, size_t y, char **map)
 {
-	char left_x;
-	char right_x;
+	char	left_x;
+	char	right_x;
 
 	left_x = 0;
 	if (x != 0)
@@ -39,10 +48,10 @@ static void	check_x_axis(int x, int y, char **map)
 	check_with_around_arg(left_x, map[y][x], right_x);
 }
 
-static void	check_y_axis(int x, int y, char **map)
+static void	check_y_axis(size_t x, size_t y, char **map)
 {
-	char up_y;
-	char down_y;
+	char	up_y;
+	char	down_y;
 
 	up_y = 0;
 	if (y != 0 && x < ft_strlen(map[y - 1]))
@@ -55,12 +64,12 @@ static void	check_y_axis(int x, int y, char **map)
 
 void	test_map(char **map, t_game *game)
 {
-	int	x;
-	int	y;
-	int	content_flag[4];
+	size_t	x;
+	size_t	y;
+	int		content_flag[4];
 
 	ft_memset(content_flag, 0, sizeof(int) * 4);
-	y = -1;	
+	y = -1;
 	while (map[++y])
 	{
 		x = -1;
@@ -70,7 +79,6 @@ void	test_map(char **map, t_game *game)
 			check_x_axis(x, y, map);
 			check_y_axis(x, y, map);
 		}
-//		printf("%s\n", map[y]);
 	}
 	if (!(content_flag[0] && content_flag[1] && content_flag[2] == 1))
 		ft_error("map is invalid");

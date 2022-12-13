@@ -1,4 +1,4 @@
-CC = cc -g -lmlx -framework OpenGL -framework AppKit -lz#-Wall -Wextra -Werror
+CC = cc -Wall -Wextra -Werror 
 RSCS = parsing/parsing.c \
 	   parsing/open_file.c \
 	   parsing/read_element.c \
@@ -18,7 +18,7 @@ NAME = cub3d
 
 $(NAME): $(OBJS)
 	$(MAKE) -C ./libft bonus
-	$(CC) -g $(CFLAGS) $(COMFILE_FLAGS) $(OBJS) -Llibft -Lminilibx -lft -o $(NAME) -lncurses
+	$(CC) $(CFLAGS) $(COMFILE_FLAGS) $(OBJS) -lmlx -framework OpenGL -framework AppKit -lz -Llibft -Lminilibx -lft -o $(NAME) -lncurses
 
 all : $(NAME)
 

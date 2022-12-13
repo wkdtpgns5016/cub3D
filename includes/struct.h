@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   struct.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sunwchoi <sunwchoi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/13 14:27:20 by sunwchoi          #+#    #+#             */
+/*   Updated: 2022/12/13 14:27:21 by sunwchoi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef STRUCT_H
 # define STRUCT_H
 
 typedef struct s_text
 {
-	char *element[6];
-	char **map;
+	char	*element[6];
+	char	**map;
 }	t_text;
 
 typedef struct s_bg
@@ -29,7 +41,7 @@ typedef struct s_wall
 	int		height;
 }	t_wall;
 
-typedef struct	s_man
+typedef struct s_man
 {
 	double	pos_x;
 	double	pos_y;
@@ -75,7 +87,7 @@ typedef struct s_texture_info
 	int		tex_num;
 	int		tex_x;
 	int		tex_y;
-	double	texPos;
+	double	tex_pos;
 }	t_texture_info;
 
 #endif
