@@ -52,11 +52,11 @@ void	test_element(char **element, t_game *game)
 													element[i], \
 													&game->wall.width, \
 													&game->wall.height);
+		if (!game->wall.img_ptr[i])
+			ft_error("image path is invalid");
 		game->wall.texture[i] = (int *)mlx_get_data_addr(game->wall.img_ptr[i], \
 									&game->wall.bytes_per_pixel, \
 									&game->wall.size_line, &game->wall.endian);
-		if (!game->wall.img_ptr[i])
-			ft_error("image path is invalid");
 	}
 	i = COLOR - 1;
 	while (++i < TYPE)
