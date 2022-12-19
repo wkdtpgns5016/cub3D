@@ -18,16 +18,19 @@ NAME = cub3d
 
 $(NAME): $(OBJS)
 	$(MAKE) -C ./libft bonus
+	$(MAKE) -C ./minilibx
 	$(CC) $(CFLAGS) $(COMFILE_FLAGS) $(OBJS) -lmlx -framework OpenGL -framework AppKit -lz -Llibft -Lminilibx -lft -o $(NAME) -lncurses
 
 all : $(NAME)
 
 clean:
 	$(MAKE) -C ./libft clean
+	$(MAKE) -C ./minilibx clean
 	rm -f $(OBJS) $(OBJS_BONUS)
 
 fclean: clean
 	$(MAKE) -C ./libft fclean
+	$(MAKE) -C ./minilibx fclean
 	rm -f $(NAME)
 
 re: 
